@@ -43,7 +43,7 @@ namespace Nicolas2422.RpiNetapi.Controllers
                     Size = (int)item["Size"],
                     Used = (int)item["Used"],
                     Avail = (int)item["Avail"],
-                    Percent = (decimal)item["Percent"],
+                    Usage = (decimal)item["Usage"],
                     Mounted = (string)item["Mounted"],
                 });
             }

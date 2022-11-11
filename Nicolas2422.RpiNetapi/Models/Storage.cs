@@ -14,7 +14,7 @@ namespace Nicolas2422.RpiNetapi.Models
 
         public int Avail { get; set; }
 
-        public decimal Percent { get; set; }
+        public decimal Usage { get; set; }
 
         public string Mounted { get; set; }
 
@@ -25,7 +25,7 @@ namespace Nicolas2422.RpiNetapi.Models
             Used = 0;
             Avail = 0;
             Type = String.Empty;
-            Percent = 0;
+            Usage = 0;
             Mounted = String.Empty;
         }
     }

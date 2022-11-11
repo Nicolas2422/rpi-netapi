@@ -51,7 +51,7 @@ namespace Nicolas2422.RpiNetapi.Utils
                         tmp.Add("Size", int.Parse(match.Groups["Size"].Value));
                         tmp.Add("Used", int.Parse(match.Groups["Used"].Value));
                         tmp.Add("Avail", int.Parse(match.Groups["Avail"].Value));
-                        tmp.Add("Percent", decimal.Parse(match.Groups["Percent"].Value));
+                        tmp.Add("Usage", decimal.Parse(match.Groups["Percent"].Value));
                         tmp.Add("Mounted", match.Groups["Mounted"].Value);
                         listDictionaryStorageInformations.Add(tmp);
                     }
@@ -264,6 +264,68 @@ namespace Nicolas2422.RpiNetapi.Utils
             {
             }
 
+            dictionaryInformations.Add("Usage", usage);
+        }
+
+        public static void RunGetMemoryInformationCmd(ref Dictionary<String, Object> dictionaryInformations)
+        {
+            int total = 0, used = 0, free = 0;
+            decimal usage = 0;
+
+            try
+            {
+                /* Run df cmd */
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "free",
+                    Arguments = "",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true
+                };
+                var proc = new Process
+                {
+                    StartInfo = psi
+                };
+                proc.Start();
+
+                /* Wait and read the cmd return */
+                Task.WaitAll(Task.Run(() =>
+                {
+                    Regex regexMemoryDataExtraction = new Regex(
+                        @"(?<label>[\da-zA-Z\/\:]+)\s+" +
+                        @"(?<total>[\d]+)\s+" +
+                        @"(?<used>[\d]+)\s+" +
+                        @"(?<free>[\d]+)\s+" +
+                        @"(?<shared>[\d]+)\s+" +
+                        @"(?<buffcache>[\d]+)\s+" +
+                        @"(?<available>[\d]+)",
+                        RegexOptions.IgnoreCase);
+
+                    while (!proc.StandardOutput.EndOfStream)
+                    {
+                        string? line = proc.StandardOutput.ReadLine();
+                        if (String.IsNullOrEmpty(line))
+                            continue;
+
+                        Match match = regexMemoryDataExtraction.Match(line);
+                        if (!match.Success || match.Groups["label"].Value.Trim() != "Mem:")
+                            continue;
+
+                        total = int.Parse(match.Groups["total"].Value);
+                        used = int.Parse(match.Groups["used"].Value);
+                        free = int.Parse(match.Groups["free"].Value);
+                        usage = (used * 100) / total;
+                    }
+                }));
+                proc.WaitForExit();
+            }
+            catch
+            {
+            }
+
+            dictionaryInformations.Add("Total", total);
+            dictionaryInformations.Add("Used", used);
+            dictionaryInformations.Add("Free", free);
             dictionaryInformations.Add("Usage", usage);
         }
     }
