@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "d3kr7JyosivXTpmjPpuvFTB25jhug+1U0s+s1H9IvECLxCd+msMb6u0WVJ4qceo5R9HalAtCHCQlWLsdKzem1g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\scesari\\workspace-git\\rpi-netapi\\Nicolas2422.RpiNetapi\\Nicolas2422.RpiNetapi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\scesari\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\scesari\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\scesari\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\scesari\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\scesari\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\scesari\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}

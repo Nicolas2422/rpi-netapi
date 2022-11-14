@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Cpu.cs" />
+    <Compile Remove="Models\Memory.cs" />
+    <Compile Remove="Models\Storage.cs" />
+    <Compile Remove="Utils\SystemInformation_.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
