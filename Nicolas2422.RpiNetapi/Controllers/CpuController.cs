@@ -13,38 +13,15 @@ namespace Nicolas2422.RpiNetapi.Controllers
     public class CpuController : ControllerBase
     {
         private readonly ILogger<CpuController> _logger;
+        private readonly SystemInformation _systemInformation;
 
-        public CpuController(ILogger<CpuController> logger)
+        public CpuController(ILogger<CpuController> logger, SystemInformation systemInformation)
         {
             _logger = logger;
+            _systemInformation = systemInformation;
         }
 
         [HttpGet]
-        public Cpu Get()
-        {
-            return BuildCpuInformations();
-        }
-
-        /// <summary>
-        /// Build cpu informations
-        /// </summary>
-        /// <returns>List of storage</returns>
-        private Cpu BuildCpuInformations()
-        {
-            Dictionary<String, Object> dictionaryInformations = new Dictionary<string, Object>();
-            SystemInformation.RunGetCpuInformationsCmd(ref dictionaryInformations);
-            SystemInformation.RunGetCpuTemperatureCmd(ref dictionaryInformations);
-            SystemInformation.RunGetCpuFrequencyCmd(ref dictionaryInformations);
-            SystemInformation.RunGetCpuUsageCmd(ref dictionaryInformations);
-
-            return new Cpu()
-            {
-                Hardware = (string)dictionaryInformations["Hardware"],
-                Model = (string)dictionaryInformations["Model"],
-                Temperature = (decimal)dictionaryInformations["Temperature"],
-                Frequency = (int)dictionaryInformations["Frequency"],
-                Usage = (decimal)dictionaryInformations["Usage"],
-            };
-        }
+        public async Task<Cpu> Get() => await _systemInformation.GetCpuInformations();
     }
 }
