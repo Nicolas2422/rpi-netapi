@@ -122,8 +122,8 @@ namespace Nicolas2422.RpiNetapi.Utils
 
             return new Models.Cpu(task.Result.Item1, task.Result.Item2,
                 cpuFreq.Result,
-                cpuUsage.Result,
-                temperature.Result
+                temperature.Result,
+                cpuUsage.Result
             );
         }
 

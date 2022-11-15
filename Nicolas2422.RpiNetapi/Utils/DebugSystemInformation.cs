@@ -104,8 +104,8 @@ Swap:       2097148           0     2097148";
 
             return new Models.Cpu(task.Result.Item1, task.Result.Item2,
                 cpuFreq.Result,
-                cpuUsage.Result,
-                temperature.Result
+                temperature.Result,
+                cpuUsage.Result
             );
         }
 
