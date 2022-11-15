@@ -6,36 +6,33 @@ using System.Text.RegularExpressions;
 
 namespace Nicolas2422.RpiNetapi.Utils
 {
-    public class SystemInformation
+    public static class SystemInformation
     {
-        public virtual async Task<IEnumerable<Models.Storage>> GetStorageInformations()
+        public async static Task<IEnumerable<Models.Storage>> GetStorageInformations()
         {
 #if DEBUG
-            DebugSystemInformation system = new DebugSystemInformation();
+            return await DebugSystemInformation.GetStorageInformations();
 #else
-            RaspbianSystemInformation system = new RaspbianSystemInformation();
+            return await RaspbianSystemInformation.GetStorageInformations();
 #endif
-            return await system.GetStorageInformations();
         }
 
-        public async virtual Task<Models.Memory> GetMemoryInformations()
+        public async static Task<Models.Memory> GetMemoryInformations()
         {
 #if DEBUG
-            DebugSystemInformation system = new DebugSystemInformation();
+            return await DebugSystemInformation.GetMemoryInformations();
 #else
-            RaspbianSystemInformation system = new RaspbianSystemInformation();
+            return await RaspbianSystemInformation.GetMemoryInformations();
 #endif
-            return await system.GetMemoryInformations();
         }
 
-        public async virtual Task<Models.Cpu> GetCpuInformations()
+        public async static Task<Models.Cpu> GetCpuInformations()
         {
 #if DEBUG
-            DebugSystemInformation system = new DebugSystemInformation();
+            return await DebugSystemInformation.GetCpuInformations();
 #else
-            RaspbianSystemInformation system = new RaspbianSystemInformation();
+            return await RaspbianSystemInformation.GetCpuInformations();
 #endif
-            return await system.GetCpuInformations();
         }
     }
 }

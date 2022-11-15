@@ -6,9 +6,9 @@ using System.Text.RegularExpressions;
 
 namespace Nicolas2422.RpiNetapi.Utils
 {
-    public class RaspbianSystemInformation : SystemInformation
+    public static class RaspbianSystemInformation
     {
-        public override async Task<IEnumerable<Models.Storage>> GetStorageInformations()
+        public async static Task<IEnumerable<Models.Storage>> GetStorageInformations()
         {
             /* Run df cmd */
             var psi = new ProcessStartInfo
@@ -59,7 +59,7 @@ namespace Nicolas2422.RpiNetapi.Utils
             });
         }
 
-        public override async Task<Models.Memory> GetMemoryInformations()
+        public async static Task<Models.Memory> GetMemoryInformations()
         {
             int total = 0, used = 0, free = 0;
             decimal usage = 0;
@@ -111,7 +111,7 @@ namespace Nicolas2422.RpiNetapi.Utils
             return new Models.Memory(total, used, free, usage);
         }
 
-        public override async Task<Models.Cpu> GetCpuInformations()
+        public async static Task<Models.Cpu> GetCpuInformations()
         {
             Task<(string, string)> task = Task.Run(async () => await GetCpuHardware());
             Task<decimal> temperature = Task.Run(async () => await GetCpuTemperature());
@@ -127,7 +127,7 @@ namespace Nicolas2422.RpiNetapi.Utils
             );
         }
 
-        private async Task<(string, string)> GetCpuHardware()
+        private async static Task<(string, string)> GetCpuHardware()
         {
             /* Run df cmd */
             var psi = new ProcessStartInfo
@@ -171,7 +171,7 @@ namespace Nicolas2422.RpiNetapi.Utils
             });
         }
 
-        private async Task<decimal> GetCpuTemperature()
+        private async static Task<decimal> GetCpuTemperature()
         {
             decimal temperature = 0;
             /* Run df cmd */
@@ -205,7 +205,7 @@ namespace Nicolas2422.RpiNetapi.Utils
             return temperature;
         }
 
-        private async Task<int> GetCpuFrequency()
+        private async static Task<int> GetCpuFrequency()
         {
             int frequency = 0;
 
@@ -239,7 +239,7 @@ namespace Nicolas2422.RpiNetapi.Utils
             return frequency;
         }
 
-        private async Task<decimal> GetCpuUsage()
+        private async static Task<decimal> GetCpuUsage()
         {
             decimal usage = 0;
 

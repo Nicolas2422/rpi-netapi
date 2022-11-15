@@ -6,9 +6,9 @@ using System.Text.RegularExpressions;
 
 namespace Nicolas2422.RpiNetapi.Utils
 {
-    public class DebugSystemInformation : SystemInformation
+    public static class DebugSystemInformation
     {
-        public override async Task<IEnumerable<Models.Storage>> GetStorageInformations()
+        public async static Task<IEnumerable<Models.Storage>> GetStorageInformations()
         {
             string standardOutput = @"
 Filesystem             Type  1K-blocks       Used     Avail Use% Mounted on
@@ -52,7 +52,7 @@ Filesystem             Type  1K-blocks       Used     Avail Use% Mounted on
             });
         }
 
-        public override async Task<Models.Memory> GetMemoryInformations()
+        public async static Task<Models.Memory> GetMemoryInformations()
         {
             int total = 0, used = 0, free = 0;
             decimal usage = 0;
@@ -93,7 +93,7 @@ Swap:       2097148           0     2097148";
             return new Models.Memory(total, used, free, usage);
         }
 
-        public override async Task<Models.Cpu> GetCpuInformations()
+        public async static Task<Models.Cpu> GetCpuInformations()
         {
             Task<(string, string)> task = Task.Run(async () => await GetCpuHardware());
             Task<decimal> temperature = Task.Run(async () => await GetCpuTemperature());
@@ -109,7 +109,7 @@ Swap:       2097148           0     2097148";
             );
         }
 
-        private async Task<(string, string)> GetCpuHardware()
+        private async static Task<(string, string)> GetCpuHardware()
         {
             /* Wait and read the cmd return */
             return await Task.Run(() =>
@@ -186,7 +186,7 @@ Model           : Raspberry Pi 4 Model B Rev 1.1
             });
         }
 
-        private async Task<decimal> GetCpuTemperature()
+        private async static Task<decimal> GetCpuTemperature()
         {
             decimal temperature = 0;
 
@@ -208,7 +208,7 @@ Model           : Raspberry Pi 4 Model B Rev 1.1
             return temperature;
         }
 
-        private async Task<int> GetCpuFrequency()
+        private async static Task<int> GetCpuFrequency()
         {
             int frequency = 0;
 
@@ -229,7 +229,7 @@ Model           : Raspberry Pi 4 Model B Rev 1.1
             return frequency;
         }
 
-        private async Task<decimal> GetCpuUsage()
+        private async static Task<decimal> GetCpuUsage()
         {
             decimal usage = 0;
 

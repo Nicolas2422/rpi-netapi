@@ -13,15 +13,13 @@ namespace Nicolas2422.RpiNetapi.Controllers
     public class CpuController : ControllerBase
     {
         private readonly ILogger<CpuController> _logger;
-        private readonly SystemInformation _systemInformation;
 
-        public CpuController(ILogger<CpuController> logger, SystemInformation systemInformation)
+        public CpuController(ILogger<CpuController> logger)
         {
             _logger = logger;
-            _systemInformation = systemInformation;
         }
 
         [HttpGet]
-        public async Task<Cpu> Get() => await _systemInformation.GetCpuInformations();
+        public async Task<Cpu> Get() => await SystemInformation.GetCpuInformations();
     }
 }
