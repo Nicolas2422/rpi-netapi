@@ -12,13 +12,15 @@ namespace Nicolas2422.RpiNetapi.Controllers
     public class StorageController : ControllerBase
     {
         private readonly ILogger<StorageController> _logger;
+        private readonly ISystemInformation _systemInformation;
 
-        public StorageController(ILogger<StorageController> logger)
+        public StorageController(ILogger<StorageController> logger, ISystemInformation systemInformation)
         {
             _logger = logger;
+            _systemInformation = systemInformation;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Storage>> Get() => await SystemInformation.GetStorageInformations();
+        public async Task<IEnumerable<Storage>> Get() => await _systemInformation.GetStorageInformations();
     }
 }

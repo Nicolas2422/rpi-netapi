@@ -9,13 +9,15 @@ namespace Nicolas2422.RpiNetapi.Controllers
     public class MemoryController : ControllerBase
     {
         private readonly ILogger<MemoryController> _logger;
+        private readonly ISystemInformation _systemInformation;
 
-        public MemoryController(ILogger<MemoryController> logger)
+        public MemoryController(ILogger<MemoryController> logger, ISystemInformation systemInformation)
         {
             _logger = logger;
+            _systemInformation = systemInformation;
         }
 
         [HttpGet]
-        public async Task<Memory> Get() => await SystemInformation.GetMemoryInformations();
+        public async Task<Memory> Get() => await _systemInformation.GetMemoryInformations();
     }
 }

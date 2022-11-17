@@ -9,6 +9,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<ISystemInformation>(provider =>
+{
+#if DEBUG
+    return new DebugSystemInformation();
+#else
+    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    {
+        return new DebugSystemInformation();
+    }
+    else
+    {
+        return new RaspbianSystemInformation();
+    }
+#endif
+});
+
 // Build app
 var app = builder.Build();
 // Configure the HTTP request pipeline.
